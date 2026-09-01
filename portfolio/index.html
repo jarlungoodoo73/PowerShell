@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jabidahs Creations Systems Hub Exchange</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --accent: #58a6ff;
+      --accent2: #bc8cff;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --glow: 0 0 18px #58a6ff55, 0 0 40px #bc8cff33;
+      --card-glow: 0 0 0 1px #30363d, 0 4px 24px #58a6ff22;
+    }
+    [data-theme="light"] {
+      --bg: #f6f8fa;
+      --surface: #ffffff;
+      --border: #d0d7de;
+      --accent: #0969da;
+      --accent2: #8250df;
+      --text: #1f2328;
+      --muted: #656d76;
+      --glow: 0 0 12px #0969da33;
+      --card-glow: 0 0 0 1px #d0d7de, 0 4px 16px #0969da15;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem;
+      height: 56px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-weight: 700; font-size: 1rem;
+      color: var(--accent);
+      text-shadow: var(--glow);
+      letter-spacing: 0.01em;
+    }
+    .nav-brand svg { filter: drop-shadow(0 0 6px var(--accent)); }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .theme-toggle {
+      background: none; border: 1px solid var(--border);
+      color: var(--text); cursor: pointer;
+      border-radius: 6px; padding: 0.3rem 0.6rem;
+      font-size: 1rem; transition: border-color 0.2s;
+    }
+    .theme-toggle:hover { border-color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem 3.5rem;
+      background: radial-gradient(ellipse 80% 50% at 50% 0%, #58a6ff18 0%, transparent 70%);
+    }
+    .avatar {
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #58a6ff, #bc8cff);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 2.8rem;
+      box-shadow: var(--glow), 0 0 0 4px var(--border);
+      margin-bottom: 1.5rem;
+      animation: pulse 3s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: var(--glow), 0 0 0 4px var(--border); }
+      50% { box-shadow: 0 0 30px #58a6ff88, 0 0 60px #bc8cff44, 0 0 0 4px var(--border); }
+    }
+    .hero h1 {
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+    .hero .tagline {
+      font-size: 1rem; color: var(--muted);
+      max-width: 520px; margin: 0 auto 0.25rem;
+    }
+    .hero .tagline2 {
+      font-size: 0.9rem; color: var(--accent2);
+      font-style: italic;
+    }
+
+    /* ── BADGES ── */
+    .badges {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;
+      padding: 1.5rem 2rem;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      padding: 0.25rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 0.78rem; color: var(--muted);
+      background: var(--surface);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .badge:hover { border-color: var(--accent); color: var(--accent); }
+    .badge .dot { width: 7px; height: 7px; border-radius: 50%; background: #3fb950; box-shadow: 0 0 6px #3fb950; }
+
+    /* ── PROJECTS GRID ── */
+    .section-title {
+      text-align: center;
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--text);
+      padding: 0.5rem 2rem 1.5rem;
+      letter-spacing: 0.02em;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+    }
+    @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--card-glow);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s;
+      cursor: default;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), 0 8px 32px #58a6ff33;
+    }
+    .card-icon {
+      font-size: 1.8rem; margin-bottom: 0.75rem;
+      filter: drop-shadow(0 0 8px var(--accent));
+    }
+    .card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text); }
+    .card p { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+    .card-status {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-size: 0.72rem; font-weight: 600;
+      padding: 0.15rem 0.55rem;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .status-active { background: #3fb95022; color: #3fb950; border: 1px solid #3fb95055; }
+    .status-building { background: #d2992222; color: #d29922; border: 1px solid #d2992255; }
+    .status-planned { background: #58a6ff22; color: #58a6ff; border: 1px solid #58a6ff55; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── GIT GLOW ICON ── */
+    .git-icon {
+      display: inline-block;
+      animation: gitglow 2.5s ease-in-out infinite;
+    }
+    @keyframes gitglow {
+      0%, 100% { filter: drop-shadow(0 0 4px #f78166); }
+      50% { filter: drop-shadow(0 0 14px #f78166) drop-shadow(0 0 28px #ff6e4077); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-brand">
+      <svg width="22" height="22" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38
+          0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+          -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+          .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+          -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27
+          c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12
+          .51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48
+          0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+      </svg>
+      Jabidahs Creations Systems Hub Exchange
+    </div>
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="SESSIONS.md">Sessions</a>
+      <a href="metadata.json">Metadata</a>
+      <a href="https://github.com/jarlungoodoo73" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">🌙</button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="avatar">🚀</div>
+    <h1>Jabidahs Creations Systems Hub Exchange</h1>
+    <p class="tagline">Enterprise-quality ecosystem — polished, GitHub-integrated, always shipping.</p>
+    <p class="tagline2">⚡ Ol' Git, My Team & I — humming in perfect harmony.</p>
+  </section>
+
+  <!-- BADGES -->
+  <div class="badges">
+    <span class="badge"><span class="dot"></span> Active Development</span>
+    <span class="badge">
+      <span class="git-icon">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="#f78166"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+      </span>
+      GitHub-Integrated
+    </span>
+    <span class="badge">🛠 PowerShell Core</span>
+    <span class="badge">🌐 Copilot-Powered</span>
+    <span class="badge">📦 Metadata-Tracked</span>
+    <span class="badge">🔐 Enterprise Quality</span>
+  </div>
+
+  <!-- PROJECTS -->
+  <p class="section-title" id="projects">✦ Projects</p>
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-icon">🌐</div>
+      <h3>Portfolio Hub</h3>
+      <p>The central landing page for the Jabidahs Creations ecosystem — dark mode, glowing GitHub icons, project grid, and full brand identity.</p>
+      <span class="card-status status-active">Active</span>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">⚙️</div>
+      <h3>PowerShell Core Fork</h3>
+      <p>Personal fork of PowerShell with custom CI workflows, Docker image builds, and enterprise metadata tracking via <code>es-metadata.yml</code>.</p>
+      <span class="card-status status-active">Active</span>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <h3>Chronicle Metadata Engine</h3>
+      <p>Session history collection system: <code>SESSIONS.md</code> log, <code>metadata.json</code> schema, and GitHub Actions validation — making every Copilot session /chronicle-ready.</p>
+      <span class="card-status status-building">Building</span>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🔗</div>
+      <h3>Systems Integration Layer</h3>
+      <p>Planned hub connecting all ecosystem projects — unified API surface, shared secrets management, cross-repo dependency graph, and release orchestration.</p>
+      <span class="card-status status-planned">Planned</span>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      Built with ❤️ by <strong>Jabidahs Creations Systems Hub Exchange</strong> ·
+      <a href="https://github.com/jarlungoodoo73" target="_blank" rel="noopener">@jarlungoodoo73</a> ·
+      <a href="metadata.json">metadata.json</a>
+    </p>
+  </footer>
+
+  <script>
+    // Respect OS preference on load
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const saved = localStorage.getItem('theme');
+    const theme = saved || (prefersDark ? 'dark' : 'light');
+    if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+
+    function toggleTheme() {
+      const btn = document.querySelector('.theme-toggle');
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      if (isLight) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'dark');
+        btn.textContent = '🌙';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        btn.textContent = '☀️';
+      }
+    }
+    // Set correct button icon on load
+    document.querySelector('.theme-toggle').textContent =
+      document.documentElement.getAttribute('data-theme') === 'light' ? '☀️' : '🌙';
+  </script>
+</body>
+</html>
