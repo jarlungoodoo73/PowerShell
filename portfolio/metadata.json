@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "1.0.0",
+  "brand": {
+    "name": "Jabidahs Creations Systems Hub Exchange",
+    "owner": "jarlungoodoo73",
+    "githubProfile": "https://github.com/jarlungoodoo73",
+    "description": "Enterprise-quality portfolio and ecosystem brand — polished, GitHub-integrated, Copilot-powered.",
+    "established": "2026-07-20",
+    "lastUpdated": "2026-09-01"
+  },
+  "projects": [
+    {
+      "id": "portfolio-hub",
+      "name": "Portfolio Hub",
+      "description": "Central landing page for the Jabidahs Creations ecosystem with dark mode, glowing GitHub icons, and project grid.",
+      "status": "active",
+      "repo": "https://github.com/jarlungoodoo73/PowerShell",
+      "path": "portfolio/index.html",
+      "deployedUrl": null,
+      "assets": [
+        "portfolio/index.html",
+        "portfolio/metadata.json",
+        "portfolio/SESSIONS.md"
+      ],
+      "createdAt": "2026-07-20",
+      "updatedAt": "2026-09-01"
+    },
+    {
+      "id": "powershell-fork",
+      "name": "PowerShell Core Fork",
+      "description": "Personal fork of PowerShell with custom CI workflows, Docker image builds, and enterprise metadata tracking.",
+      "status": "active",
+      "repo": "https://github.com/jarlungoodoo73/PowerShell",
+      "path": "/",
+      "deployedUrl": null,
+      "assets": [
+        ".github/workflows/docker-image.yml",
+        ".github/workflows/linux-ci.yml",
+        "es-metadata.yml",
+        "DotnetRuntimeMetadata.json"
+      ],
+      "createdAt": "2026-07-16",
+      "updatedAt": "2026-09-01"
+    },
+    {
+      "id": "chronicle-metadata-engine",
+      "name": "Chronicle Metadata Engine",
+      "description": "Session history collection system: SESSIONS.md log, metadata.json schema, and GitHub Actions validation to make every Copilot session /chronicle-ready.",
+      "status": "building",
+      "repo": "https://github.com/jarlungoodoo73/PowerShell",
+      "path": "portfolio/",
+      "deployedUrl": null,
+      "assets": [
+        "portfolio/SESSIONS.md",
+        "portfolio/metadata.json",
+        ".github/workflows/validate-portfolio-metadata.yml"
+      ],
+      "createdAt": "2026-09-01",
+      "updatedAt": "2026-09-01"
+    },
+    {
+      "id": "systems-integration-layer",
+      "name": "Systems Integration Layer",
+      "description": "Planned hub connecting all ecosystem projects — unified API surface, shared secrets management, cross-repo dependency graph, and release orchestration.",
+      "status": "planned",
+      "repo": null,
+      "path": null,
+      "deployedUrl": null,
+      "assets": [],
+      "createdAt": null,
+      "updatedAt": null
+    }
+  ],
+  "sessions": {
+    "totalCount": 28,
+    "namedCount": 1,
+    "lastSessionDate": "2026-09-01",
+    "notableSessionIds": [
+      {
+        "id": "c634e561-aee6-4a13-83bd-36fb9b387d1d",
+        "summary": "Portfolio Landing Page",
+        "date": "2026-07-20",
+        "turns": 133,
+        "output": "portfolio/index.html (initial build)"
+      },
+      {
+        "id": "8adbb784-1f58-4e7c-8734-326c9421c38c",
+        "summary": "/chronicle tips review — personalized usage patterns and recommendations",
+        "date": "2026-08-04",
+        "turns": 1,
+        "output": "5 personalized workflow tips"
+      },
+      {
+        "id": "019cbcf7",
+        "summary": "Implement portfolio folder: index.html, metadata.json, SESSIONS.md, GitHub Actions validator",
+        "date": "2026-09-01",
+        "turns": null,
+        "output": "portfolio/ folder committed to git"
+      }
+    ]
+  },
+  "pullRequests": [
+    {
+      "number": 1,
+      "repo": "jarlungoodoo73/PowerShell",
+      "url": "https://github.com/jarlungoodoo73/PowerShell/pull/1",
+      "title": "jarlungoodoo73-patch-1",
+      "status": "merged",
+      "mergedAt": "2026-08-03"
+    }
+  ]
+}

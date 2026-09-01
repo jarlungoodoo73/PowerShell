@@ -1,0 +1,65 @@
+name: Validate Portfolio Metadata
+
+on:
+  push:
+    paths:
+      - 'portfolio/metadata.json'
+  pull_request:
+    paths:
+      - 'portfolio/metadata.json'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate metadata.json
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Validate JSON is well-formed
+        run: |
+          echo "::group::Validating portfolio/metadata.json"
+          python3 -c "
+          import json, sys
+          with open('portfolio/metadata.json') as f:
+              data = json.load(f)
+
+          errors = []
+
+          # Required top-level keys
+          required = ['schemaVersion', 'brand', 'projects', 'sessions', 'pullRequests']
+          for key in required:
+              if key not in data:
+                  errors.append(f'Missing required top-level key: {key}')
+
+          # Brand checks
+          brand = data.get('brand', {})
+          for field in ['name', 'owner', 'lastUpdated']:
+              if not brand.get(field):
+                  errors.append(f'brand.{field} is required and must not be empty')
+
+          # Project checks
+          valid_statuses = {'active', 'building', 'planned', 'archived'}
+          for i, project in enumerate(data.get('projects', [])):
+              if not project.get('id'):
+                  errors.append(f'projects[{i}].id is required')
+              if not project.get('name'):
+                  errors.append(f'projects[{i}].name is required')
+              status = project.get('status')
+              if status not in valid_statuses:
+                  errors.append(f'projects[{i}].status must be one of {valid_statuses}, got: {status!r}')
+
+          if errors:
+              for e in errors:
+                  print(f'::error file=portfolio/metadata.json::{e}')
+              sys.exit(1)
+          else:
+              print('✅ metadata.json is valid')
+              print(f'  Brand: {data[\"brand\"][\"name\"]}')
+              print(f'  Projects: {len(data[\"projects\"])}')
+              print(f'  Last updated: {data[\"brand\"][\"lastUpdated\"]}')
+          "
+          echo "::endgroup::"
